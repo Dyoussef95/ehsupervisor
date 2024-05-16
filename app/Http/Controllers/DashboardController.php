@@ -12,7 +12,9 @@ class DashboardController extends Controller
     {
         $clients = Client::all();
         foreach($clients as $client){
+            if(isset($client->connection)){
             $client->users = $client->connection->response();
+            }
         }
         return view('dashboard.index')->with('clients',$clients);
     }

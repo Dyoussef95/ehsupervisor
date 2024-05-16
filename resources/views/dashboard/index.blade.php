@@ -30,20 +30,25 @@
             </tr>
         </thead>
         <tbody>
+            @forelse($clients as $client)
             <tr>
-                @forelse($clients as $client)
                 <td>{{ $loop->iteration }}</td>
                 <td>{{ $client->name }}</td>
                 <td>{{ $client->plan->name }}</td>
                 <td>{{ $client->plan->users }}</td>
+                @if(isset($client->connection))
                 <td @if($client->plan->users<=count($client->users))
                      class="text-bg-danger"
                      @endif
-                     >{{ count($client->users) }}</td>
-                @empty
-                <p>No hay planes registrados</p>
-                @endforelse
+                     >{{ count($client->users) }}
+                </td>
+                @else
+                <td>Sin conexión</td>
+                @endif
             </tr>
+            @empty
+            <p>No hay planes registrados</p>
+            @endforelse
         </tbody>
     </table>
 </div>
