@@ -3,10 +3,10 @@
 @section('content')
 
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-    <h1 class="h2">Planes</h1>
+    <h1 class="h2">Clientes</h1>
 </div>
 
-<a type="button" class="btn btn-primary" href="{{ route('plans.create') }}">Agregar nuevo plan</a>
+<a type="button" class="btn btn-primary" href="{{ route('clients.create') }}">Agregar nuevo cliente</a>
 <br><br>
 <div class="table-responsive small">
     <table class="table table-striped table-sm">
@@ -14,22 +14,26 @@
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Nombre</th>
-                <th scope="col">Usuarios</th>
-                <th scope="col">Almacenamiento</th>
+                <th scope="col">Plan</th>
+                <th scope="col">Conexión</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
             </tr>
         </thead>
         <tbody>
-        @forelse($plans as $plan)
+        @forelse($clients as $client)
             <tr>
                <td>{{ $loop->iteration }}</td>
-               <td>{{ $plan -> name }}</td>
-               <td>{{ $plan -> users }}</td>
-               <td>{{ $plan -> storage }}GB</td>
+               <td>{{ $client -> name }}</td>
+               <td>{{isset($client->plan) ? $client->plan->name : '-' }}</td>
                <td>
-                  <a href="{{ route('plans.edit', $plan) }}" class="btn btn-success btn-sm">Editar</a>
+               <a class="link-success" href="{{ route('clients.connections.index', $client) }}">Ver conexión</a>
                </td>
                <td>
-                  <form action="{{ route('plans.destroy', $plan)}}" method="POST">
+                  <a href="{{ route('clients.edit', $client) }}" class="btn btn-success btn-sm">Editar</a>
+               </td>
+               <td>
+                  <form action="{{ route('clients.destroy', $client)}}" method="POST">
                      @method('DELETE')
                      @csrf
                      <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
@@ -37,7 +41,7 @@
                </td>
             </tr>
          @empty
-            <p>No hay planes registrados</p>
+            <p>No hay clientes registrados</p>
          @endforelse
         </tbody>
     </table>

@@ -6,7 +6,7 @@
     <h1 class="h2">Planes</h1>
 </div>
 
-<form action="{{ route('plans.store') }}" method="POST" role="form">
+<form action="{{ route('plans.store') }}" method="POST" role="form" id="form">
         <legend>Crear nuevo plan</legend>
 
         @include('plans.form')
