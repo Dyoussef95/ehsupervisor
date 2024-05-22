@@ -220,10 +220,16 @@
       </button>
     </li>
   </ul>
+  <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6 link-primary" href="{{ route('index') }}">{{ Auth::user()->name }}</a>
+
 
   <div id="navbarSearch" class="navbar-search w-100 collapse">
     <input class="form-control w-100 rounded-0 border-0" type="text" placeholder="Search" aria-label="Search">
   </div>
+
+
+</div>
+
 </header>
 
 <div class="container-fluid">
@@ -314,10 +320,13 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link d-flex align-items-center gap-2" href="#">
-                <svg class="bi"><use xlink:href="#door-closed"/></svg>
-                Sign out
-              </a>
+              <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button type="submit" class="nav-link d-flex align-items-center gap-2">
+                      <svg class="bi"><use xlink:href="#door-closed"/></svg>
+                      Sign out
+                    </button>
+                </form>
             </li>
           </ul>
         </div>

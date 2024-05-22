@@ -1,29 +1,31 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PlanController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ConnectionController;
 use App\Http\Controllers\DashboardController;
+use Illuminate\Support\Facades\Route;
 
 Route::get('/', [DashboardController::class, 'index'])
-->name('index');
+->middleware(['auth', 'verified'])->name('index');
 
 /*Route::get('/', function () {
-    return view('dashboard.index');
-})->name('index');*/
+    return view('welcome');
+})->middleware(['auth', 'verified'])->name('inicio');*/
 
-Route::resource('plans', PlanController::class);
-Route::resource('clients', ClientController::class);
-Route::resource('clients.connections', ConnectionController::class);
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
-/*Route::get('/clients/{client}/connections', [ConnectionController::class, 'index'])
-->name('connectios.index');
-Route::get('/clients/{client}/connections/create', [ConnectionController::class, 'create'])
-->name('connectios.create');
-Route::post('/clients/{client}/connections', [ConnectionController::class, 'store'])
-->name('connectios.store');
-Route::get('/clients/{client}/connections/{connection}', [ConnectionController::class, 'show'])
-->name('connectios.show');
-Route::get('/clients/{client}/connections/{connection}/edit', [ConnectionController::class, 'edit'])
-->name('connectios.edit');*/
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+Route::resource('plans', PlanController::class)->middleware(['auth', 'verified']);
+Route::resource('clients', ClientController::class)->middleware(['auth', 'verified']);
+Route::resource('clients.connections', ConnectionController::class)->middleware(['auth', 'verified']);
+
+require __DIR__.'/auth.php';
