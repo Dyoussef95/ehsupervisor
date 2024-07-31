@@ -41,6 +41,8 @@ class ConnectionController extends Controller
         return redirect(route('clients.connections.index', $client));
     }
 
+    
+
     /**
      * Display the specified resource.
      */

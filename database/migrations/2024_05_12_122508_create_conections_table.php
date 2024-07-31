@@ -25,6 +25,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('conections');
+        Schema::table('connections', function (Blueprint $table) {
+            $table->dropForeign(['client_id']);
+        });
+        Schema::dropIfExists('connections');
     }
 };
