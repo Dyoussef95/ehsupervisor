@@ -15,6 +15,8 @@
                 <th scope="col">#</th>
                 <th scope="col">Nombre</th>
                 <th scope="col">Plan</th>
+                <th scope="col">Usuarios</th>
+                <th scope="col">Almacenamiento</th>
                 <th scope="col">Conexión</th>
                 <th scope="col"></th>
                 <th scope="col"></th>
@@ -26,6 +28,8 @@
                <td>{{ $loop->iteration }}</td>
                <td>{{ $client -> name }}</td>
                <td>{{isset($client->plan) ? $client->plan->name : '-' }}</td>
+               <td>{{ $client -> users }}</td>
+               <td>{{ $client -> storage }}GB</td>
                <td>
                <a class="link-success" href="{{ route('clients.connections.index', $client) }}">Ver conexión</a>
                </td>

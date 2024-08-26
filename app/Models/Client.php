@@ -16,8 +16,15 @@ class Client extends Model
         return $this->belongsTo(Plan::class);
     }
 
-    public function connection(): HasOne
+    public function conection(): HasOne
     {
         return $this->hasOne(Connection::class);
+    }
+
+    public function getActuallyUsers(){
+        if(!$this->conection->response()->successful()){
+            dd("exito");
+        }
+        dd($this->conection->response()->successful());
     }
 }

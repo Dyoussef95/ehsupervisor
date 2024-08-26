@@ -14,8 +14,6 @@
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Nombre</th>
-                <th scope="col">Usuarios</th>
-                <th scope="col">Almacenamiento</th>
             </tr>
         </thead>
         <tbody>
@@ -23,8 +21,6 @@
             <tr>
                <td>{{ $loop->iteration }}</td>
                <td>{{ $plan -> name }}</td>
-               <td>{{ $plan -> users }}</td>
-               <td>{{ $plan -> storage }}GB</td>
                <td>
                   <a href="{{ route('plans.edit', $plan) }}" class="btn btn-success btn-sm">Editar</a>
                </td>

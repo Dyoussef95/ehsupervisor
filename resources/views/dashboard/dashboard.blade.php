@@ -4,9 +4,9 @@
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-    <meta name="generator" content="Hugo 0.122.0">
+    <meta name="description" content="Moodle data dashboard">
+    <meta name="author" content="eh! ideas">
+    <meta name="generator" content="eh! ideas">
     <title>eh!supervisor</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/dashboard/">
@@ -101,6 +101,10 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.min.css" rel="stylesheet">
     <!-- Custom styles for this template -->
     <link href="{{asset('css/dashboard/dashboard.css')}}" rel="stylesheet">
+    <!-- DataTable styles -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.1.4/css/dataTables.dataTables.css" />
+  
+
   </head>
   <body>
     <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
@@ -119,7 +123,7 @@
       </symbol>
     </svg>
 
-    <div class="dropdown position-fixed bottom-0 end-0 mb-3 me-3 bd-mode-toggle">
+    <div class="dropdown position-fixed bottom-0 starts-0 mb-3 me-3 bd-mode-toggle">
       <button class="btn btn-bd-primary py-2 dropdown-toggle d-flex align-items-center"
               id="bd-theme"
               type="button"
@@ -282,7 +286,7 @@
             -->
           </ul>
 
-          <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-body-secondary text-uppercase">
+         <!-- <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-body-secondary text-uppercase">
             <span>Saved reports</span>
             <a class="link-secondary" href="#" aria-label="Add a new report">
               <svg class="bi"><use xlink:href="#plus-circle"/></svg>
@@ -309,6 +313,8 @@
               </a>
             </li>
           </ul>
+
+    -->
 
           <hr class="my-3">
 
@@ -340,7 +346,13 @@
 </div>
 <script src="{{asset('js/bootstrap.bundle.min.js')}}"></script>
 
+    <script src="{{asset('js/jquery.js')}}"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.2/dist/chart.umd.js" integrity="sha384-eI7PSr3L1XLISH8JdDII5YN/njoSsxfbrkCTnJrzXt+ENP5MOVBxD+l6sEG4zoLp" crossorigin="anonymous"></script>
+    <!-- DataTable script -->
+    <script src="https://cdn.datatables.net/2.1.4/js/dataTables.js"></script>
+    
     <script src="{{asset('js/dashboard/dashboard.js')}}"></script>
+    <script src="{{asset('js/dashboard/datatable.js')}}"></script>
+    
   </body>
 </html>

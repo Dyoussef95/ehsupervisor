@@ -14,8 +14,6 @@ return new class extends Migration
         Schema::create('plans', function (Blueprint $table) {
             $table->id();
             $table->string('name', length: 300);
-            $table->bigInteger('users');
-            $table->bigInteger('storage');
             $table->timestamps();
         });
     }

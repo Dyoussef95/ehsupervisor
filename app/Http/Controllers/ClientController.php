@@ -37,6 +37,8 @@ class ClientController extends Controller
     {
         $client = new Client;
         $client->name = $request->name;
+        $client->users = $request->users;
+        $client->storage = $request->storage;
         $client->plan_id = $request->plan_id;
         $client->save();
         return redirect(route('clients.index'));
@@ -68,6 +70,8 @@ class ClientController extends Controller
     public function update(Request $request, Client $client): RedirectResponse
     {
         $client->name = $request->name;
+        $client->users = $request->users;
+        $client->storage = $request->storage;
         $client->plan_id = $request->plan_id;
         $client->save();
         return redirect(route('clients.index'));

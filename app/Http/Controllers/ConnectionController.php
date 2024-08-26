@@ -36,6 +36,14 @@ class ConnectionController extends Controller
         $connection = new Connection;
         $connection->url = $request->url;
         $connection->token = $request->token;
+        $connection->users_access_report_id = $request->users_access_report_id;
+        $test = $connection->testConnection();
+       
+        if($test==1){
+            return dd("error 1"); back();
+        }else if($test==2){
+            return dd("error 2");
+        }
         $connection->client_id = $client->id;
         $connection->save();
         return redirect(route('clients.connections.index', $client));
@@ -69,6 +77,7 @@ class ConnectionController extends Controller
         $connection->url = $request->url;
         $connection->token = $request->token;
         $connection->client_id = $client->id;
+        $connection->users_access_report_id = $request->users_access_report_id;
         $connection->save();
         return redirect(route('clients.connections.index', $client));
     }

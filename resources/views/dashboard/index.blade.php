@@ -27,22 +27,40 @@
                 <th scope="col">Plan</th>
                 <th scope="col">Usuarios contratados</th>
                 <th scope="col">Usuarios actuales</th>
+                <th scope="col">Usuarios activos</th>
+                <th scope="col">Usuarios suspendidos</th>
+                <th scope="col">Usuarios que accedieron en {{ $month }}</th>
             </tr>
         </thead>
         <tbody>
             @forelse($clients as $client)
             <tr>
                 <td>{{ $loop->iteration }}</td>
-                <td>{{ $client->name }}</td>
+                <td><a class="link-primary" href="{{ route('index.client', $client) }}">{{ $client->name }}</a></td>
                 <td>{{ $client->plan->name }}</td>
-                <td>{{ $client->plan->users }}</td>
-                @if(isset($client->connection))
-                <td @if($client->plan->users<=count($client->users))
-                     class="text-bg-danger"
+                <td>{{ $client->users }}</td>
+                @if(isset($client->conection))
+                <td @if($client->users<=count($client->users_campus))
+                     
+                    class="text-bg-danger"
+                     
                      @endif
-                     >{{ count($client->users) }}
+                     >{{ count($client->users_campus)-1 }}
                 </td>
+                <td>
+                {{ $client->active-1 }}
+                </td>
+                <td>
+                {{ $client->suspended }}
+                </td>
+                <td>
+                {{ $client->monthAccess }}
+                </td>
+                
                 @else
+                <td>Sin conexión</td>
+                <td>Sin conexión</td>
+                <td>Sin conexión</td>
                 <td>Sin conexión</td>
                 @endif
             </tr>
@@ -52,5 +70,5 @@
         </tbody>
     </table>
 </div>
-<canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>
+<!-- <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas> -->
 @endsection

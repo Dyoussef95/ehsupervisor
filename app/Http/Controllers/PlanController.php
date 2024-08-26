@@ -36,8 +36,6 @@ class PlanController extends Controller
     {
         $plan = new Plan;
         $plan->name = $request->name;
-        $plan->users = $request->users;
-        $plan->storage = $request->storage;
         $plan->save();
         return redirect(route('plans.index'));
     }
@@ -64,8 +62,6 @@ class PlanController extends Controller
     public function update(Request $request, Plan $plan): RedirectResponse
     {
         $plan->name = $request->name;
-        $plan->users = $request->users;
-        $plan->storage = $request->storage;
         $plan->save();
         return redirect(route('plans.index'));
     }
