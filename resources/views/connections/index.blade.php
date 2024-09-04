@@ -30,7 +30,7 @@
                <td>{{ $client -> conection -> token }}</td>
                <td>{{ $client -> conection -> users_access_report_id}}</td>
                <td>
-                  <form action="{{ route('clients.destroy', $client)}}" method="POST">
+                  <form action="{{ route('clients.connections.destroy', [$client, $client->conection])}}" method="POST">
                      @method('DELETE')
                      @csrf
                      <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>

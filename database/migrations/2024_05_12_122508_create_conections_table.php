@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('url', length: 300);
             $table->string('token', length: 300);
             $table->bigInteger('users_access_report_id');
+            $table->bigInteger('users_active_report_id');
             $table->foreignId('client_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();
         });

@@ -12,38 +12,29 @@ class DashboardController extends Controller
     {
         $clients = Client::all();
         $thisMonth = getdate()['mon'];
+        $thisYear = getdate()['year'];
         $month = getdate()['month'];
         foreach($clients as $client){
             if(isset($client->conection)){
                 
-                $client->users_campus = $client->conection->response();
-                
-            
-                $active = 0;
-                $suspended = 0;
+                $client->users_campus = $client->conection->allUsers();
+        
                 $monthAccess = 0;
-            
                 foreach($client->users_campus as $user){
-                    
-                    if($user['suspended']==false){
-                        $active++;
-                    }else{
-                        $suspended++;
-                    }
-                    
-                    if(getdate($user['lastaccess'])['mon']==$thisMonth){
+                    if(getdate($user['lastaccess'])['mon']==$thisMonth && 
+                    getdate($user['lastaccess'])['year']==$thisYear){
                         $monthAccess++;
                     }
                     
                 }
-                
-                $client->active=$active;
-                $client->suspended=$suspended;
+                $client->all = count($client->users_campus);
+                $client->active=$client->conection->onlyActive();
+                $client->suspended=$client->all - $client->active;
                 $client->monthAccess=$monthAccess;
         }
            
         }
-        //dd($clients);  
+
         return view('dashboard.index', compact('clients','month'));
        
     }
@@ -51,35 +42,26 @@ class DashboardController extends Controller
     public function client_index(Client $client): View
     {
         $thisMonth = getdate()['mon'];
+        $thisYear = getdate()['year'];
         $month = getdate()['month'];
             if(isset($client->conection)){
                 
-                $client->users_campus = $client->conection->response();
-                
-            
-                $active = 0;
-                $suspended = 0;
+                $client->users_campus = $client->conection->allUsers();
+        
                 $monthAccess = 0;
-            
                 foreach($client->users_campus as $user){
-                    
-                    if($user['suspended']==false){
-                        $active++;
-                    }else{
-                        $suspended++;
-                    }
-                    
-                    if(getdate($user['lastaccess'])['mon']==$thisMonth){
+                    if(getdate($user['lastaccess'])['mon']==$thisMonth && 
+                    getdate($user['lastaccess'])['year']==$thisYear){
                         $monthAccess++;
                     }
                     
                 }
-                
-                $client->active=$active;
-                $client->suspended=$suspended;
+                $client->all = count($client->users_campus);
+                $client->active=$client->conection->onlyActive();
+                $client->suspended=$client->all - $client->active;
                 $client->monthAccess=$monthAccess;
         }
-           
+             
         $loginsPerMonth = array_reverse($client->conection->logins_per_month());
         return view('dashboard.clients.index', compact('client','month','loginsPerMonth'));
        

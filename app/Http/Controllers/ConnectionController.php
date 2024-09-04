@@ -7,6 +7,8 @@ use App\Models\Client;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\Validator;
+use Closure;
 
 class ConnectionController extends Controller
 {
@@ -33,16 +35,43 @@ class ConnectionController extends Controller
      */
     public function store(Client $client, Request $request): RedirectResponse
     {
+        
+
         $connection = new Connection;
         $connection->url = $request->url;
         $connection->token = $request->token;
         $connection->users_access_report_id = $request->users_access_report_id;
+        $connection->users_active_report_id = $request->users_active_report_id;
         $test = $connection->testConnection();
        
+        $validator = Validator::make($request->all(), [
+            'token' => 'required',
+            'users_access_report_id' => 'required|integer',
+            'users_active_report_id' => 'required|integer',
+            'url' => 'required|unique:App\Models\Connection,url',
+        ]);
+
         if($test==1){
             return dd("error 1"); back();
         }else if($test==2){
-            return dd("error 2");
+            //return dd("error 2");
+          
+
+ 
+            $validator2 = Validator::make($request->all(), [
+
+                'url' => [
+                    function (string $attribute, mixed $value, Closure $fail) {
+                       
+                        if ($value==$value) {
+                            $fail("La conexión con la {$attribute} falló. Habilite los web services");
+                        }
+                    },
+                ],
+                
+            ])->validate();
+            
+            
         }
         $connection->client_id = $client->id;
         $connection->save();
@@ -87,6 +116,7 @@ class ConnectionController extends Controller
      */
     public function destroy(Client $client, Connection $connection): RedirectResponse
     {
+        
         $connection->delete();
         return redirect(route('clients.connections.index', $client));
     }

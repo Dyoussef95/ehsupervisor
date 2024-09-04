@@ -45,7 +45,7 @@
                     class="text-bg-danger"
                      
                      @endif
-                     >{{ count($client->users_campus)-1 }}
+                     >{{ $client->all-1 }}
                 </td>
                 <td>
                 {{ $client->active-1 }}
