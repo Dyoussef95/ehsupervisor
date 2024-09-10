@@ -10,6 +10,7 @@ class DashboardController extends Controller
 {
     public function index(): View
     {
+        $url = 'dashboard';
         $clients = Client::all();
         $thisMonth = getdate()['mon'];
         $thisYear = getdate()['year'];
@@ -35,12 +36,13 @@ class DashboardController extends Controller
            
         }
 
-        return view('dashboard.index', compact('clients','month'));
+        return view('dashboard.index', compact('clients','month','url'));
        
     }
 
     public function client_index(Client $client): View
     {
+        $url = 'dashboard';
         $thisMonth = getdate()['mon'];
         $thisYear = getdate()['year'];
         $month = getdate()['month'];
@@ -63,7 +65,7 @@ class DashboardController extends Controller
         }
              
         $loginsPerMonth = array_reverse($client->conection->logins_per_month());
-        return view('dashboard.clients.index', compact('client','month','loginsPerMonth'));
+        return view('dashboard.clients.index', compact('client','month','loginsPerMonth','url'));
        
     }
 }

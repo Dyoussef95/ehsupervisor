@@ -5,10 +5,11 @@
 
     <form method="POST" action="{{ route('login') }}">
         @csrf
-
+        
         <x-application-logo class="" />
         <!-- Email Address -->
         <div class="form-floating">
+        
             <x-text-input id="email" type="email" name="email" :value="old('email')" required autocomplete="username" placeholder="name@example.com"/>
             <x-input-label for="email" :value="__('Email')" />
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
@@ -16,6 +17,7 @@
 
         <!-- Password -->
         <div class="form-floating">
+
             <x-text-input id="password"
                             type="password"
                             name="password"

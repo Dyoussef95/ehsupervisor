@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name', length: 300);
             $table->bigInteger('users');
             $table->bigInteger('storage');
-            $table->foreignId('plan_id')->nullable()->constrained()->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignId('plan_id')->nullable()->constrained()->nullOnDelete()->cascadeOnUpdate();
             $table->timestamps();
         });
     }

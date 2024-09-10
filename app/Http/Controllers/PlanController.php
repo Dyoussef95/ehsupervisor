@@ -16,9 +16,11 @@ class PlanController extends Controller
      */
     public function index(): View
     {
+        $url = 'plans';
         $plans = Plan::all();
         return view('plans.index')
-                ->with('plans',$plans);;
+                ->with('plans',$plans)
+                ->with('url',$url);
     }
 
     /**
@@ -26,7 +28,8 @@ class PlanController extends Controller
      */
     public function create(): View
     {
-        return view('plans.create');
+        $url = 'plans';
+        return view('plans.create')->with('url',$url);
     }
 
     /**
@@ -45,7 +48,10 @@ class PlanController extends Controller
      */
     public function show(Plan $plan): View
     {
-        return view('plans.show', ['plan' => $plan]);
+        $url = 'plans';
+        return view('plans.show')
+                ->with('plan',$plan)
+                ->with('url',$url);
     }
 
     /**
@@ -53,7 +59,10 @@ class PlanController extends Controller
      */
     public function edit(Plan $plan): View
     {
-        return view('plans.edit', ['plan' => $plan]);
+        $url = 'plans';
+        return view('plans.edit')
+                ->with('plan',$plan)
+                ->with('url',$url);
     }
 
     /**

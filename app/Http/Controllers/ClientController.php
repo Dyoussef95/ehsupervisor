@@ -16,8 +16,10 @@ class ClientController extends Controller
     public function index(): View
     {
         $clients = Client::all();
+        $url = 'clients';
         return view('clients.index')
-                ->with('clients',$clients);
+                ->with('clients',$clients)
+                ->with('url',$url);
     }
 
     /**
@@ -25,9 +27,11 @@ class ClientController extends Controller
      */
     public function create(): View
     {
+        $url = 'clients';
         $plans = Plan::all();
         return view('clients.create')
-                ->with('plans',$plans);
+                ->with('plans',$plans)
+                ->with('url',$url);
     }
 
     /**
@@ -49,8 +53,10 @@ class ClientController extends Controller
      */
     public function show(Client $client): View
     {
+        $url = 'clients';
         return view('clients.show')
-                ->with('client',$client);
+                ->with('client',$client)
+                ->with('url',$url);
     }
 
     /**
@@ -58,10 +64,12 @@ class ClientController extends Controller
      */
     public function edit(Client $client): View
     {
+        $url = 'clients';
         $plans = Plan::all();
         return view('clients.edit')
                 ->with('client',$client)
-                ->with('plans',$plans);
+                ->with('plans',$plans)
+                ->with('url',$url);
     }
 
     /**

@@ -17,8 +17,11 @@ class ConnectionController extends Controller
      */
     public function index(Client $client): View
     {
+        $url = 'clients';
         return view('connections.index')
-                ->with('client',$client);
+                ->with('client',$client)
+                ->with('url',$url);
+                
     }
 
     /**
@@ -26,8 +29,10 @@ class ConnectionController extends Controller
      */
     public function create(Client $client): View
     {
+        $url = 'clients';
         return view('connections.create')
-                ->with('client',$client);
+                ->with('client',$client)
+                ->with('url',$url);
     }
 
     /**
@@ -93,9 +98,11 @@ class ConnectionController extends Controller
      */
     public function edit(Client $client, Connection $connection): View
     {
+        $url = 'clients';
         return view('connections.edit')
                 ->with('client',$client)
-                ->with('connection',$connection);
+                ->with('connection',$connection)
+                ->with('url',$url);
     }
 
     /**

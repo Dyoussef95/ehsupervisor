@@ -26,6 +26,7 @@
 
 .sidebar .nav-link.active {
   color: #2470dc;
+  background-color: gainsboro;
 }
 
 .sidebar-heading {
