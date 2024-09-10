@@ -17,7 +17,7 @@ return new class extends Migration
             $table->bigInteger('active_users')->nullable($value = true);
             $table->bigInteger('suspended_users')->nullable($value = true);
             $table->bigInteger('users_access')->nullable($value = true);
-            $table->foreignId('client_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate()->nullable($value = true);
+            $table->foreignId('client_id')->nullable()->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();
         });
     }
